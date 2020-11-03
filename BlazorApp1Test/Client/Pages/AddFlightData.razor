@@ -1,0 +1,55 @@
+﻿@page "/adddata"
+
+@using Microsoft.AspNetCore.SignalR.Client
+@using BlazorApp1Test.Shared
+
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+
+<h3>Add Flight Data</h3>
+
+<button class="btn btn-primary" @onclick="AddRandomFlightData">Add Random Data</button>
+
+@code {
+    private HubConnection hubConnection;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder()
+            .WithUrl(NavigationManager.ToAbsoluteUri("/broadcastHub"))
+            .Build();
+
+        await hubConnection.StartAsync();
+    }
+
+    protected async Task AddRandomFlightData()
+    {
+        Random rand = new Random();
+        GForceParameter gForceParameter = new GForceParameter();
+
+        gForceParameter.AccelX = rand.NextDouble();
+        gForceParameter.AccelY = rand.NextDouble();
+        gForceParameter.AccelZ = rand.NextDouble();
+        gForceParameter.Weight = 2154.000732;
+
+        await Http.PostAsJsonAsync("api/GForceParameters", gForceParameter);
+        if (IsConnected) await SendMessage();
+        //NavigationManager.NavigateTo("realtime");
+    }
+
+    Task SendMessage() => hubConnection.SendAsync("SendMessage");
+
+    public bool IsConnected =>
+        hubConnection.State == HubConnectionState.Connected;
+
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+
+    //void Cancel()
+    //{
+    //    NavigationManager.NavigateTo("listbooks");
+    //}
+}

@@ -1,0 +1,109 @@
+﻿@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<button class="btn btn-primary" @onclick="IncrementCountUp">+++</button>
+<button class="btn btn-primary" @onclick="IncrementCountDown">---</button>
+
+@code {
+    private int currentCount = 0;
+
+    private void IncrementCountUp()
+    {
+        currentCount++;
+        if (value < 260)
+        {
+            value += 10;
+        }
+
+    }
+
+    private void IncrementCountDown()
+    {
+        currentCount--;
+        if (value > 0)
+        {
+            value -= 10;
+        }
+
+    }
+}
+
+<h1>
+    Radzen Blazor Arc Gauge
+</h1>
+<div class="row">
+    <div class="col-md-6 col-sm-12 p-4">
+        <RadzenArcGauge Style="width: 100%; height: 250px;">
+            <RadzenArcGaugeScale Step="20" Min="0" Max="260" MinorStep="2" Radius="1.5" TickPosition=@tickPosition Y="0.9" Margin="0">
+                <RadzenArcGaugeScaleValue Value=@value ShowValue=@showValue>
+                    <Template Context="pointer">
+                        <h4>
+                            @pointer.Value <sup>km/h</sup>
+                        </h4>
+                    </Template>
+                </RadzenArcGaugeScaleValue>
+            </RadzenArcGaugeScale>
+        </RadzenArcGauge>
+    </div>
+    <div class="col-md-6 col-sm-12 p-4">
+        <p>
+            <label>Value <RadzenSlider Min="0" Max="260" @bind-Value=@value /></label>
+        </p>
+        <p>
+            <label>Show the pointer value <RadzenCheckBox @bind-Value=@showValue /></label>
+        </p>
+        <p>
+            <label>Tick position <RadzenDropDown @bind-Value=@tickPosition Data=@tickPositions /> </label>
+        </p>
+    </div>
+</div>
+
+@code {
+    bool showValue = true;
+    double value = 100;
+    IEnumerable<GaugeTickPosition> tickPositions = Enum.GetValues(typeof(GaugeTickPosition)).Cast<GaugeTickPosition>();
+    GaugeTickPosition tickPosition = GaugeTickPosition.Outside;
+}
+
+<h1>
+    Radzen Blazor Radial Gauge
+</h1>
+<div class="row">
+    <div class="col-md-6 col-sm-12 p-4">
+        <RadzenRadialGauge Style="width: 100%; height: 300px;">
+            <RadzenRadialGaugeScale StartAngle="-150" EndAngle="150" Step="20" Min="0" Max="260" TickPosition=@tickPositionRadial>
+                <RadzenRadialGaugeScalePointer Value=@value Length="0.6" ShowValue=@showValue>
+                    <Template Context="pointer">
+                        <h4>
+                            @pointer.Value <sup>km/h</sup>
+                        </h4>
+                    </Template>
+                </RadzenRadialGaugeScalePointer>
+                <RadzenRadialGaugeScaleRange From="0" To="150" Fill="green" />
+                <RadzenRadialGaugeScaleRange From="150" To="200" Fill="orange" />
+                <RadzenRadialGaugeScaleRange From="200" To="260" Fill="red" />
+            </RadzenRadialGaugeScale>
+        </RadzenRadialGauge>
+    </div>
+    <div class="col-md-6 col-sm-12 p-4">
+        <p>
+            <label>Value <RadzenSlider Min="0" Max="260" @bind-Value=@value /></label>
+        </p>
+        <p>
+            <label>Show the pointer value <RadzenCheckBox @bind-Value=@showValue /></label>
+        </p>
+        <p>
+            <label>Tick position <RadzenDropDown @bind-Value=@tickPositionRadial Data=@tickPositionsRadial /> </label>
+        </p>
+    </div>
+</div>
+
+@code {
+    //bool showValue = true;
+    //double value = 100;
+    IEnumerable<GaugeTickPosition> tickPositionsRadial = Enum.GetValues(typeof(GaugeTickPosition)).Cast<GaugeTickPosition>();
+    GaugeTickPosition tickPositionRadial = GaugeTickPosition.Inside;
+}

@@ -1,0 +1,94 @@
+﻿@page "/realtime"
+
+@using BlazorApp1Test.Shared
+@using Microsoft.AspNetCore.SignalR.Client
+
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
+<h3>Flight Data Real Time</h3>
+
+@if (gForceParameters == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Accel-X</th>
+                <th>Accel-Y</th>
+                <th>Accel-Z</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var param in gForceParameters)
+            {
+                <tr>
+                    <td>@param.AccelX</td>
+                    <td>@param.AccelY</td>
+                    <td>@param.AccelZ</td>
+                    <td>@param.Weight</td>
+                    <td>
+                        @*<a href='/editbook/@param.Id'>Edit</a>*@
+                        <button class="btn btn-primary" @onclick="@(id => DeleteData(param.Id))">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    GForceParameter[] gForceParameters;
+    private HubConnection hubConnection;
+
+    protected override async Task OnInitializedAsync()
+    {
+        hubConnection = new HubConnectionBuilder().WithUrl(NavigationManager.ToAbsoluteUri("/broadcastHub")).Build();
+
+        hubConnection.On("ReceiveMessage", () =>
+        {
+            CallLoadData();
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+
+        await LoadData();
+    }
+
+    private void CallLoadData()
+    {
+        Task.Run(async () =>
+        {
+            await LoadData();
+        });
+    }
+
+    protected async Task LoadData()
+    {
+        gForceParameters = await Http.GetFromJsonAsync<GForceParameter[]>("api/GForceParameters");
+        StateHasChanged();
+
+    }
+
+    public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
+
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
+
+    Task SendMessage() => hubConnection.SendAsync("SendMessage");
+
+    protected async Task DeleteData(int id)
+    {
+        await Http.DeleteAsync("api/GForceParameters/" + id);
+        if (IsConnected) await SendMessage();
+        StateHasChanged();
+        //NavigationManager.NavigateTo("listbooks");
+    }
+}

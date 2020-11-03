@@ -1,0 +1,242 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Server\\BlazorApp1Test.Server.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Client\\BlazorApp1Test.Client.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Client\\BlazorApp1Test.Client.csproj",
+        "projectName": "BlazorApp1Test.Client",
+        "projectPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Client\\BlazorApp1Test.Client.csproj",
+        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Client\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {
+              "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj": {
+                "projectPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.Build": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.AspNetCore.Components.WebAssembly.DevServer": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Radzen.Blazor": {
+              "target": "Package",
+              "version": "[2.15.12, )"
+            },
+            "System.Net.Http.Json": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Server\\BlazorApp1Test.Server.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Server\\BlazorApp1Test.Server.csproj",
+        "projectName": "BlazorApp1Test.Server",
+        "projectPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Server\\BlazorApp1Test.Server.csproj",
+        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Server\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Client\\BlazorApp1Test.Client.csproj": {
+                "projectPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Client\\BlazorApp1Test.Client.csproj"
+              },
+              "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj": {
+                "projectPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Components.WebAssembly.Server": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj",
+        "projectName": "BlazorApp1Test.Shared",
+        "projectPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\BlazorApp1Test.Shared.csproj",
+        "packagesPath": "C:\\Users\\John\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\John\\Desktop\\BlazorApp1Test\\BlazorApp1Test\\BlazorApp1Test\\Shared\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\John\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
