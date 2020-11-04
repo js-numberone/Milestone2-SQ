@@ -4,43 +4,255 @@
 <h1>Radzen Blazor Chart with line series</h1>
 <div class="row">
     <div class="col-md-6 col-sm-12 p-4">
-        <label>Smooth <RadzenCheckBox @bind-Value="@smooth" Name="smooth"></RadzenCheckBox></label>
         <RadzenChart>
-            <RadzenLineSeries Smooth="@smooth" Data="@revenue2019" CategoryProperty="Date" Title="2019" LineType="LineType.Dashed" ValueProperty="Revenue">
+            <RadzenLineSeries Data="@xcell" CategoryProperty="Date" Title="X" LineType="LineType.Dashed" ValueProperty="Value">
                 <RadzenMarkers MarkerType="MarkerType.Square" />
             </RadzenLineSeries>
-            <RadzenCategoryAxis Padding="20" FormatString="{0:MMM}" />
-            <RadzenValueAxis Formatter="@FormatAsUSD">
+            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
+            <RadzenValueAxis>
                 <RadzenGridLines Visible="false" />
-                <RadzenAxisTitle Text="Revenue in USD" />
+                <RadzenAxisTitle Text="X - G Force" />
+            </RadzenValueAxis>
+        </RadzenChart>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 p-4">
+        <RadzenChart>
+            <RadzenLineSeries Data="@ycell" CategoryProperty="Date" Title="Y" LineType="LineType.Dashed" ValueProperty="Value">
+                <RadzenMarkers MarkerType="MarkerType.Square" />
+            </RadzenLineSeries>
+            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
+            <RadzenValueAxis>
+                <RadzenGridLines Visible="false" />
+                <RadzenAxisTitle Text="Y - G Force" />
+            </RadzenValueAxis>
+        </RadzenChart>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 p-4">
+        <RadzenChart>
+            <RadzenLineSeries Data="@zcell" CategoryProperty="Date" Title="Z" LineType="LineType.Dashed" ValueProperty="Value">
+                <RadzenMarkers MarkerType="MarkerType.Square" />
+            </RadzenLineSeries>
+            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
+            <RadzenValueAxis>
+                <RadzenGridLines Visible="false" />
+                <RadzenAxisTitle Text="Z - G Force" />
+            </RadzenValueAxis>
+        </RadzenChart>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 col-sm-12 p-4">
+        <RadzenChart>
+            <RadzenLineSeries Data="@weight" CategoryProperty="Date" Title="W" LineType="LineType.Dashed" ValueProperty="Value">
+                <RadzenMarkers MarkerType="MarkerType.Square" />
+            </RadzenLineSeries>
+            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
+            <RadzenValueAxis>
+                <RadzenGridLines Visible="false" />
+                <RadzenAxisTitle Text="Weight" />
             </RadzenValueAxis>
         </RadzenChart>
     </div>
 </div>
 @code {
-    bool smooth = false;
     class DataItem
     {
         public DateTime Date { get; set; }
-        public double Revenue { get; set; }
+        public double Value { get; set; }
     }
 
-    string FormatAsUSD(object value)
-    {
-        return ((double)value).ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
-    }
-
-    DataItem[] revenue2019 = new DataItem[] {
+    DataItem[] xcell = new DataItem[] {
         new DataItem
         {
-            Date = DateTime.Parse("2019-01-01"),
-            Revenue = 234000
+            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
         },
 
         new DataItem
         {
-            Date = DateTime.Parse("2019-02-01"),
-            Revenue = 134000
+            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+    };
+
+    DataItem[] ycell = new DataItem[] {
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+    };
+
+    DataItem[] zcell = new DataItem[] {
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+    };
+
+    DataItem[] weight = new DataItem[] {
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754,
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = -0.319754
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
+        },
+
+        new DataItem
+        {
+            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
+            Value = 0.257793
         },
 
     };

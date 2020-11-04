@@ -13,6 +13,6 @@ C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\bin\De
 C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.csprojAssemblyReference.cache
 C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.AssemblyInfoInputs.cache
 C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.AssemblyInfo.cs
-C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.csproj.CoreCompileInputs.cache
 C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.dll
 C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.pdb
+C:\Users\John\Desktop\BlazorApp1Test\BlazorApp1Test\BlazorApp1Test\Shared\obj\Debug\netstandard2.1\BlazorApp1Test.Shared.csproj.CoreCompileInputs.cache

@@ -25,14 +25,14 @@ namespace BlazorApp1Test.Server.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GForceParameter>>> GetGForceParameter()
         {
-            return await _context.GForceParameter.ToListAsync();
+            return await _context.GForceParameters.ToListAsync();
         }
 
         // GET: api/GForceParameters/5
         [HttpGet("{id}")]
         public async Task<ActionResult<GForceParameter>> GetGForceParameter(int id)
         {
-            var gForceParameter = await _context.GForceParameter.FindAsync(id);
+            var gForceParameter = await _context.GForceParameters.FindAsync(id);
 
             if (gForceParameter == null)
             {
@@ -48,7 +48,7 @@ namespace BlazorApp1Test.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGForceParameter(int id, GForceParameter gForceParameter)
         {
-            if (id != gForceParameter.Id)
+            if (id != gForceParameter.Record_Id)
             {
                 return BadRequest();
             }
@@ -80,39 +80,23 @@ namespace BlazorApp1Test.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<GForceParameter>> PostGForceParameter(GForceParameter gForceParameter)
         {
-            Random rand = new Random();
-            gForceParameter.Id = rand.Next();
-            _context.GForceParameter.Add(gForceParameter);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (GForceParameterExists(gForceParameter.Id))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            _context.GForceParameters.Add(gForceParameter);
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGForceParameter", new { id = gForceParameter.Id }, gForceParameter);
+            return CreatedAtAction("GetGForceParameter", new { id = gForceParameter.Record_Id }, gForceParameter);
         }
 
         // DELETE: api/GForceParameters/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<GForceParameter>> DeleteGForceParameter(int id)
         {
-            var gForceParameter = await _context.GForceParameter.FindAsync(id);
+            var gForceParameter = await _context.GForceParameters.FindAsync(id);
             if (gForceParameter == null)
             {
                 return NotFound();
             }
 
-            _context.GForceParameter.Remove(gForceParameter);
+            _context.GForceParameters.Remove(gForceParameter);
             await _context.SaveChangesAsync();
 
             return gForceParameter;
@@ -120,7 +104,7 @@ namespace BlazorApp1Test.Server.Controllers
 
         private bool GForceParameterExists(int id)
         {
-            return _context.GForceParameter.Any(e => e.Id == id);
+            return _context.GForceParameters.Any(e => e.Record_Id == id);
         }
     }
 }

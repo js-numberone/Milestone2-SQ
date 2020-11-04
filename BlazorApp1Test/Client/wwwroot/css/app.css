@@ -23,7 +23,7 @@ app {
 .top-row {
     height: 3.5rem;
     display: flex;
-    align-items: center;
+    align-items: self-start;
 }
 
 .main {

@@ -28,10 +28,10 @@
         Random rand = new Random();
         GForceParameter gForceParameter = new GForceParameter();
 
-        gForceParameter.AccelX = rand.NextDouble();
-        gForceParameter.AccelY = rand.NextDouble();
-        gForceParameter.AccelZ = rand.NextDouble();
-        gForceParameter.Weight = 2154.000732;
+        //gForceParameter.Accel_X = rand.Next();
+        //gForceParameter.Accel_Y = rand.NextDouble();
+        //gForceParameter.Accel_Z = rand.NextDouble();
+        //gForceParameter.Weight = 2154;
 
         await Http.PostAsJsonAsync("api/GForceParameters", gForceParameter);
         if (IsConnected) await SendMessage();

@@ -17,24 +17,42 @@ else
     <table class='table'>
         <thead>
             <tr>
+                <th>Tail #</th>
                 <th>Accel-X</th>
                 <th>Accel-Y</th>
                 <th>Accel-Z</th>
                 <th>Weight</th>
+                <th>Time Recorded</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var param in gForceParameters)
+            @foreach (var gParam in gForceParameters)
             {
                 <tr>
-                    <td>@param.AccelX</td>
-                    <td>@param.AccelY</td>
-                    <td>@param.AccelZ</td>
-                    <td>@param.Weight</td>
-                    <td>
-                        @*<a href='/editbook/@param.Id'>Edit</a>*@
-                        <button class="btn btn-primary" @onclick="@(id => DeleteData(param.Id))">Delete</button>
-                    </td>
+                    <td>@gParam.TailNumber</td>
+                    <td>@gParam.AccelX</td>
+                    <td>@gParam.AccelY</td>
+                    <td>@gParam.AccelZ</td>
+                    <td>@gParam.TimeRecorded</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <table class='table'>
+        <thead>
+            <tr>
+                <th>Altitude</th>
+                <th>Pitch</th>
+                <th>Bank</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var aParam in attitudeParameters)
+            {
+                <tr>
+                    <td>@aParam.Altitude</td>
+                    <td>@aParam.Pitch</td>
+                    <td>@aParam.Bank</td>
                 </tr>
             }
         </tbody>
@@ -43,11 +61,12 @@ else
 
 @code {
     GForceParameter[] gForceParameters;
+    AttitudeParamater[] attitudeParameters;
     private HubConnection hubConnection;
 
     protected override async Task OnInitializedAsync()
     {
-        hubConnection = new HubConnectionBuilder().WithUrl(NavigationManager.ToAbsoluteUri("/broadcastHub")).Build();
+        hubConnection = new HubConnectionBuilder().WithUrl(NavigationManager.ToAbsoluteUri("/flightDataHub")).Build();
 
         hubConnection.On("ReceiveMessage", () =>
         {
@@ -71,6 +90,7 @@ else
     protected async Task LoadData()
     {
         gForceParameters = await Http.GetFromJsonAsync<GForceParameter[]>("api/GForceParameters");
+        attitudeParameters = await Http.GetFromJsonAsync<AttitudeParamater[]>("api/AttitudeParameters");
         StateHasChanged();
 
     }

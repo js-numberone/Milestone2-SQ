@@ -64,6 +64,7 @@ namespace BlazorApp1Test.Server
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
                 endpoints.MapHub<BroadcastHub>("/broadcastHub");
+                endpoints.MapHub<FlightDataHub>("/flightDataHub");
                 endpoints.MapFallbackToFile("index.html");
             });
         }

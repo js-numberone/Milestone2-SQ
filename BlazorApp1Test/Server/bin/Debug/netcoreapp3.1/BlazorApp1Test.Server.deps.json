@@ -2775,6 +2775,9 @@
         }
       },
       "BlazorApp1Test.Shared/1.0.0": {
+        "dependencies": {
+          "System.ComponentModel.Annotations": "4.7.0"
+        },
         "runtime": {
           "BlazorApp1Test.Shared.dll": {}
         },
