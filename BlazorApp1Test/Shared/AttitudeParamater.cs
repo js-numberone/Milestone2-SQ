@@ -5,12 +5,12 @@ using System.Text;
 
 namespace BlazorApp1Test.Shared
 {
-    public class AttitudeParamater
+    public class AttitudeParameter
     {
         [Key]
         public int GForceID { get; set; }
-        public float Altitude { get; set; }
-        public float Pitch { get; set; }
-        public float Bank { get; set; }
+        public double Altitude { get; set; }
+        public double Pitch { get; set; }
+        public double Bank { get; set; }
     }
 }

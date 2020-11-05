@@ -23,14 +23,14 @@ namespace BlazorApp1Test.Server.Controllers
 
         // GET: api/AttitudeParameters
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<AttitudeParamater>>> GetAttitudeParameters()
+        public async Task<ActionResult<IEnumerable<AttitudeParameter>>> GetAttitudeParameters()
         {
             return await _context.AttitudeParameters.ToListAsync();
         }
 
         // GET: api/AttitudeParameters/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<AttitudeParamater>> GetAttitudeParameters(int id)
+        public async Task<ActionResult<AttitudeParameter>> GetAttitudeParameters(int id)
         {
             var attitudeParameters = await _context.AttitudeParameters.FindAsync(id);
 
@@ -46,7 +46,7 @@ namespace BlazorApp1Test.Server.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAttitudeParameters(int id, AttitudeParamater attitudeParameters)
+        public async Task<IActionResult> PutAttitudeParameters(int id, AttitudeParameter attitudeParameters)
         {
             if (id != attitudeParameters.GForceID)
             {
@@ -78,7 +78,7 @@ namespace BlazorApp1Test.Server.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<AttitudeParamater>> PostAttitudeParameters(AttitudeParamater attitudeParameters)
+        public async Task<ActionResult<AttitudeParameter>> PostAttitudeParameters(AttitudeParameter attitudeParameters)
         {
             _context.AttitudeParameters.Add(attitudeParameters);
             await _context.SaveChangesAsync();
@@ -88,7 +88,7 @@ namespace BlazorApp1Test.Server.Controllers
 
         // DELETE: api/AttitudeParameters/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<AttitudeParamater>> DeleteAttitudeParameters(int id)
+        public async Task<ActionResult<AttitudeParameter>> DeleteAttitudeParameters(int id)
         {
             var attitudeParameters = await _context.AttitudeParameters.FindAsync(id);
             if (attitudeParameters == null)

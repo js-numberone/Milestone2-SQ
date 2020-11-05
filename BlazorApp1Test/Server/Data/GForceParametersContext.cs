@@ -16,6 +16,6 @@ namespace BlazorApp1Test.Server.Data
 
         public DbSet<BlazorApp1Test.Shared.GForceParameter> GForceParameters { get; set; }
 
-        public DbSet<BlazorApp1Test.Shared.AttitudeParamater> AttitudeParameters { get; set; }
+        public DbSet<BlazorApp1Test.Shared.AttitudeParameter> AttitudeParameters { get; set; }
     }
 }

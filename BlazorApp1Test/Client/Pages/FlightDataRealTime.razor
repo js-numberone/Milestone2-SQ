@@ -61,7 +61,7 @@ else
 
 @code {
     GForceParameter[] gForceParameters;
-    AttitudeParamater[] attitudeParameters;
+    AttitudeParameter[] attitudeParameters;
     private HubConnection hubConnection;
 
     protected override async Task OnInitializedAsync()
@@ -90,7 +90,7 @@ else
     protected async Task LoadData()
     {
         gForceParameters = await Http.GetFromJsonAsync<GForceParameter[]>("api/GForceParameters");
-        attitudeParameters = await Http.GetFromJsonAsync<AttitudeParamater[]>("api/AttitudeParameters");
+        attitudeParameters = await Http.GetFromJsonAsync<AttitudeParameter[]>("api/AttitudeParameters");
         StateHasChanged();
 
     }

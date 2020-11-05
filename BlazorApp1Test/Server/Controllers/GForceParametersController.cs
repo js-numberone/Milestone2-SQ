@@ -48,7 +48,7 @@ namespace BlazorApp1Test.Server.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutGForceParameter(int id, GForceParameter gForceParameter)
         {
-            if (id != gForceParameter.Record_Id)
+            if (id != gForceParameter.RecordID)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace BlazorApp1Test.Server.Controllers
             _context.GForceParameters.Add(gForceParameter);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGForceParameter", new { id = gForceParameter.Record_Id }, gForceParameter);
+            return CreatedAtAction("GetGForceParameter", new { id = gForceParameter.RecordID }, gForceParameter);
         }
 
         // DELETE: api/GForceParameters/5
@@ -104,7 +104,7 @@ namespace BlazorApp1Test.Server.Controllers
 
         private bool GForceParameterExists(int id)
         {
-            return _context.GForceParameters.Any(e => e.Record_Id == id);
+            return _context.GForceParameters.Any(e => e.RecordID == id);
         }
     }
 }

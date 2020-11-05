@@ -1,11 +1,17 @@
 ﻿@page "/counter"
 @using System.Globalization
 
+@using BlazorApp1Test.Shared
+@using Microsoft.AspNetCore.SignalR.Client
+
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+
 <h1>Radzen Blazor Chart with line series</h1>
 <div class="row">
     <div class="col-md-6 col-sm-12 p-4">
         <RadzenChart>
-            <RadzenLineSeries Data="@xcell" CategoryProperty="Date" Title="X" LineType="LineType.Dashed" ValueProperty="Value">
+            <RadzenLineSeries Data="@gForceParameters" CategoryProperty="TimeRecorded" Title="X" LineType="LineType.Dashed" ValueProperty="AccelX">
                 <RadzenMarkers MarkerType="MarkerType.Square" />
             </RadzenLineSeries>
             <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
@@ -16,244 +22,61 @@
         </RadzenChart>
     </div>
 </div>
-<div class="row">
-    <div class="col-md-6 col-sm-12 p-4">
-        <RadzenChart>
-            <RadzenLineSeries Data="@ycell" CategoryProperty="Date" Title="Y" LineType="LineType.Dashed" ValueProperty="Value">
-                <RadzenMarkers MarkerType="MarkerType.Square" />
-            </RadzenLineSeries>
-            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
-            <RadzenValueAxis>
-                <RadzenGridLines Visible="false" />
-                <RadzenAxisTitle Text="Y - G Force" />
-            </RadzenValueAxis>
-        </RadzenChart>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-12 p-4">
-        <RadzenChart>
-            <RadzenLineSeries Data="@zcell" CategoryProperty="Date" Title="Z" LineType="LineType.Dashed" ValueProperty="Value">
-                <RadzenMarkers MarkerType="MarkerType.Square" />
-            </RadzenLineSeries>
-            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
-            <RadzenValueAxis>
-                <RadzenGridLines Visible="false" />
-                <RadzenAxisTitle Text="Z - G Force" />
-            </RadzenValueAxis>
-        </RadzenChart>
-    </div>
-</div>
-<div class="row">
-    <div class="col-md-6 col-sm-12 p-4">
-        <RadzenChart>
-            <RadzenLineSeries Data="@weight" CategoryProperty="Date" Title="W" LineType="LineType.Dashed" ValueProperty="Value">
-                <RadzenMarkers MarkerType="MarkerType.Square" />
-            </RadzenLineSeries>
-            <RadzenCategoryAxis Padding="20" FormatString="{0:t}" />
-            <RadzenValueAxis>
-                <RadzenGridLines Visible="false" />
-                <RadzenAxisTitle Text="Weight" />
-            </RadzenValueAxis>
-        </RadzenChart>
-    </div>
-</div>
+
+
 @code {
-    class DataItem
+        GForceParameter[] gForceParameters;
+        AttitudeParameter[] attitudeParameters;
+    private HubConnection hubConnection;
+
+
+    protected override async Task OnInitializedAsync()
     {
-        public DateTime Date { get; set; }
-        public double Value { get; set; }
+        hubConnection = new HubConnectionBuilder().WithUrl(NavigationManager.ToAbsoluteUri("/flightDataHub")).Build();
+
+        hubConnection.On("ReceiveMessage", () =>
+        {
+            CallLoadData();
+            StateHasChanged();
+        });
+
+        await hubConnection.StartAsync();
+
+        await LoadData();
     }
 
-    DataItem[] xcell = new DataItem[] {
-        new DataItem
+    private void CallLoadData()
+    {
+        Task.Run(async () =>
         {
-            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
+            await LoadData();
+        });
+    }
 
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
+    protected async Task LoadData()
+    {
+        gForceParameters = await Http.GetFromJsonAsync<GForceParameter[]>("api/GForceParameters");
+        attitudeParameters = await Http.GetFromJsonAsync<AttitudeParameter[]>("api/AttitudeParameters");
 
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
 
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
+        StateHasChanged();
 
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
+    }
 
-    };
+    public bool IsConnected => hubConnection.State == HubConnectionState.Connected;
 
-    DataItem[] ycell = new DataItem[] {
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
+    public void Dispose()
+    {
+        _ = hubConnection.DisposeAsync();
+    }
 
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
+    Task SendMessage() => hubConnection.SendAsync("SendMessage");
 
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-    };
-
-    DataItem[] zcell = new DataItem[] {
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-    };
-
-    DataItem[] weight = new DataItem[] {
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:00:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:01:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:02:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754,
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:03:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = -0.319754
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:04:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:05:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:06:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-        new DataItem
-        {
-            Date = DateTime.ParseExact("01:07:10", "hh:mm:ss", CultureInfo.InvariantCulture),
-            Value = 0.257793
-        },
-
-    };
+    protected async Task DeleteData(int id)
+    {
+        await Http.DeleteAsync("api/GForceParameters/" + id);
+        if (IsConnected) await SendMessage();
+        StateHasChanged();
+        //NavigationManager.NavigateTo("listbooks");
+    }
 }
